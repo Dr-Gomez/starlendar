@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Starlendar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 0;
+      margin: 0;
+      background-image: linear-gradient(-45deg, 
+      #ff3425,
+      #ee99ff,
+      #0000ff
+      );
+      
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <canvas id="starboard"></canvas>
+
+  <script>
+    const canvas = document.getElementById('starboard');
+    const ctx = canvas.getContext('2d');
+
+    const numStars = 2000;
+    function constelation() {
+
+      function distance(a, b) {
+        return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+      }
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+      ctx.lineWidth = 0.5;
+
+      const stars = [];
+      for (let i = 0; i < numStars; i++) {
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
+
+        stars.push({
+          x: x,
+          y: y
+        });
+      }
+
+      for (let i = 0; i < numStars; i++) {
+        const color = {red: Math.random() * 255, blue: Math.random() * 255, green: Math.random() * 255}
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = 'white';
+        ctx.fillStyle = `white`;
+        ctx.beginPath();
+        const starRadius = 1 + Math.random() * 2;
+        ctx.arc(stars[i].x, stars[i].y, starRadius, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+    }
+
+    function drawCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      ctx.fillStyle = "white";
+      console.log('resize')
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      constelation();
+    }
+
+    drawCanvas();
+
+    window.addEventListener('resize', drawCanvas)
+  </script>
+</body>
+
+</html>
