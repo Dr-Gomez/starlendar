@@ -37,12 +37,12 @@
 
 <body>
   <canvas id="starboard"></canvas>
-
+m 
   <script>
     const canvas = document.getElementById('starboard');
     const ctx = canvas.getContext('2d');
 
-    const numStars = 2000;
+    const numStars = 500;
     function constelation() {
 
       function distance(a, b) {
@@ -69,7 +69,7 @@
         ctx.shadowColor = 'white';
         ctx.fillStyle = `white`;
         ctx.beginPath();
-        const starRadius = 1 + Math.random() * 2;
+        const starRadius = 1 + Math.random() * 1.5;
         ctx.arc(stars[i].x, stars[i].y, starRadius, 0, 2 * Math.PI);
         ctx.fill();
       }
